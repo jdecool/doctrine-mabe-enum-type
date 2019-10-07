@@ -1,0 +1,60 @@
+{
+    "name": "jdecool/doctrine-mabe-enum-type",
+    "description": "A custom Doctrine type that maps column values to enum objects using marc-mabe/php-enum",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jérémy DECOOL",
+            "email": "contact@jdecool.fr"
+        }
+    ],
+    "keywords": [
+        "type",
+        "doctrine",
+        "enum"
+    ],
+    "require": {
+        "php": "^7.1",
+        "doctrine/dbal": "^2.6",
+        "marc-mabe/php-enum": "^4.0"
+    },
+    "require-dev": {
+        "infection/infection": "^0.12.0",
+        "phpstan/phpstan": "^0.11.1",
+        "phpunit/phpunit": "^8.0 || ^7.0",
+        "shlinkio/php-coding-standard": "1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JDecool\\Doctrine\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JDecool\\Test\\Doctrine\\": "test"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "ci": [
+            "@cs",
+            "@stan",
+            "@test:ci",
+            "@infect:ci"
+        ],
+
+        "cs": "phpcs --colors",
+        "cs:fix": "phpcbf",
+        "stan": "phpstan analyse src/ --level=6",
+
+        "test": "phpunit --colors=always",
+        "test:pretty": "phpunit --colors=always --coverage-html=build/html",
+        "test:ci": "phpdbg -qrr vendor/bin/phpunit --colors=always --coverage-clover=build/clover.xml --coverage-xml=build/coverage-xml --log-junit=build/phpunit.junit.xml",
+
+        "infect": "infection --threads=4 --min-msi=90 --log-verbosity=default --only-covered",
+        "infect:ci": "infection --threads=4 --min-msi=90 --log-verbosity=default --only-covered --coverage=build",
+        "infect:show": "infection --threads=4 --min-msi=90 --log-verbosity=default --only-covered --show-mutations"
+    }
+}

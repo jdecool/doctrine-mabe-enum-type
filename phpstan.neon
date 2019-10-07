@@ -1,0 +1,4 @@
+parameters:
+	ignoreErrors:
+		- '#Call to function method_exists#'
+		- '#function call_user_func expects callable#'
